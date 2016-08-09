@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <!-- Sets initial viewport load and disables zooming  -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
+    <title>聚会发布</title>
+
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc4/angular-material.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en'
+          rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/timepicker.css">
+</head>
+
+<body ng-app="Publish" ng-controller="PublishController as ctrl" ngCloak>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-aria.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-messages.min.js"></script>
+
+<script src="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc4/angular-material.min.js"></script>
+
+<!-- moment -->
+<script src="//cdn.bootcss.com/moment.js/2.14.1/moment-with-locales.min.js"></script>
+
+<!-- pick time & date -->
+<script src="//cdn.bootcss.com/draggabilly/2.1.1/draggabilly.pkgd.min.js"></script>
+<script src="js/timepicker.js"></script>
+
+<script src="js/publish.js"></script>
+
+<md-toolbar class="md-theme" md-whiteframe="3">
+    <h2 class="md-toolbar-tools">
+        <span>聚会发布</span>
+    </h2>
+</md-toolbar>
+
+<md-content layout-padding>
+    <form name="form" action="/doPublish" method="post" data-parsley-validate>
+        <md-input-container class="md-block">
+            <input name="name" required type="text" ng-model="name" placeholder="聚会名称(主题)">
+        </md-input-container>
+
+        <md-input-container class="md-block">
+            <input name="address" required type="address" ng-model="address" placeholder="聚会地点">
+        </md-input-container>
+
+        <md-input-container class="md-block">
+            <input ng-click="showClock()" name="time" type="text" require ng-model="time" placeholder="聚会开始时间">
+        </md-input-container>
+
+        <md-input-container class="md-block">
+            <md-checkbox ng-model="freeMode" ng-init="freeMode=false" name="freeMode">
+                不确定日期（提供一个日期范围，供其他人参考选择）
+            </md-checkbox>
+            <input type="text" name="freeMode" value="[[freeMode]]" ng-show="false">
+        </md-input-container>
+
+        <div ng-if="!freeMode" class="fade">
+            <md-datepicker ng-model="date" md-placeholder="聚会日期" md-date-filter="dateFilter" required
+                           name="date" class="md-block"></md-datepicker>
+            <input type="text" name="date" value="[[dateFormatted]]" ng-show="false">
+        </div>
+
+        <div ng-if="freeMode" class="fade">
+            <md-datepicker ng-model="startDate" md-placeholder="起始日期" md-min-date="current" md-max-date="endDate"
+                           md-date-filter="startDateFilter" required class="md-block"></md-datepicker>
+            <input type="text" name="startDate" value="[[startDateFormatted]]" ng-show="false">
+            <md-datepicker ng-model="endDate" md-placeholder="终止日期" md-min-date="startDate"
+                           md-date-filter="endDateFilter" required class="md-block"></md-datepicker>
+            <input type="text" name="endDate" value="[[endDateFormatted]]" ng-show="false">
+        </div>
+
+        <md-input-container class="md-block">
+            <p>谁来买单？</p>
+            <md-radio-group ng-model="payer">
+                <md-radio-button ng-repeat="p in payers" ng-value="p.value"
+                                 aria-checked="p.value==payer">
+                    [[ p.label ]]
+                </md-radio-button>
+            </md-radio-group>
+            <input type="text" name="payer" value="[[payer]]" ng-show="false">
+        </md-input-container>
+
+        <md-input-container class="md-block">
+            <md-checkbox ng-model="hasPunishment"
+                         ng-init="hasPunishment=false" name="hasPunishment">
+                是否惩罚鸽子行为
+            </md-checkbox>
+            <input type="text" name="hasPunishment" value="[[hasPunishment]]" ng-show="false">
+        </md-input-container>
+
+        <div ng-if="hasPunishment" class="fade">
+            <md-input-container class="md-block">
+                <input name="punishment" ng-required="[[hasPunishment]]" type="text" ng-model="punishment"
+                       placeholder="惩罚内容">
+            </md-input-container>
+        </div>
+
+        <md-button type="confirm" class="md-raised md-primary">发布</md-button>
+    </form>
+</md-content>
+
+</body>
+</html>

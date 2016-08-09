@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Sets initial viewport load and disables zooming  -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <title>出错啦</title>
+    <script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+    <!-- bootstrap -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand">{{.Title}}</a>
+        </div>
+    </div>
+</nav>
+
+<div class="panel">
+    <div class="panel-body">
+        <div class="alert alert-danger" role="alert">{{.Message}}</div>
+        <div class="alert alert-info" role="alert"><a href="/help">
+            点击查看帮助
+        </a></div>
+    </div>
+</div>
+
+</body>
+</html>

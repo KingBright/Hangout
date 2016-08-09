@@ -1,0 +1,7 @@
+# Created by .ignore support plugin (hsz.mobi)
+vendor
+Gomfile
+Hangout
+*.db
+config.yml
+

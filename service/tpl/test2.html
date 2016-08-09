@@ -1,0 +1,23 @@
+<html>
+<script src="//cdn.bootcss.com/moment.js/2.14.1/moment-with-locales.min.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en'
+      rel='stylesheet' type='text/css'>
+<script src="//cdn.bootcss.com/draggabilly/2.1.1/draggabilly.pkgd.min.js"></script>
+<link rel="stylesheet" href="../../static/css/timepicker.css">
+<script src="../../static/js/timepicker.js"></script>
+
+<body>
+
+<div id="time-picker">pick time</div>
+<input type="text" onclick="show()">
+<script>
+    var dialog = new mdDateTimePicker.default({
+        type: 'time'
+    });
+
+    show = function () {
+        dialog.show();
+    }
+</script>
+</body>
+</html>

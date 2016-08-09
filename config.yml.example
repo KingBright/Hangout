@@ -1,0 +1,12 @@
+Port: 8787
+
+WX:
+  AppId: appid
+  AppSecret: appsecret
+  OriId: oriid
+  Token: token
+  EncodedAESKey: aeskey
+
+Turing:
+  Api: turingapi
+  AppKey: apikey
