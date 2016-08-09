@@ -7,7 +7,7 @@
 - [material](https://github.com/angular/material)
 
 ##Config
-```Port: 8787
+``Port: 8787
 WX:
   AppId: appid
   AppSecret: appsecret
@@ -18,4 +18,4 @@ WX:
 Turing:
   Api: turingapi
   AppKey: apikey
-  ```
+  ``
