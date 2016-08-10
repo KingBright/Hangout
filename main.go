@@ -28,7 +28,6 @@ var (
 
 func init() {
 	config.Load("config.yml")
-	conf := config.Config
 
 	mux := core.NewServeMux()
 	mux.DefaultMsgHandleFunc(defaultMsgHandler)
@@ -37,10 +36,10 @@ func init() {
 	mux.EventHandleFunc(menu.EventTypeClick, menuClickEventHandler)
 	msgHandler = mux
 
-	msgServer = core.NewServer(conf.WX.OriId, conf.WX.AppId, conf.WX.Token, conf.WX.EncodedAESKey, msgHandler, nil)
+	msgServer = core.NewServer(config.WxOriId(), config.WxAppId(), config.WxToken(), config.WxEncodedAESKey(), msgHandler, nil)
 
-	tokenServer = core.NewDefaultAccessTokenServer(conf.WX.AppId, conf.WX.AppSecret, nil)
-	robot = turing.New(conf.Turing.Api, conf.Turing.AppKey)
+	tokenServer = core.NewDefaultAccessTokenServer(config.WxAppId(), config.WxAppSecret(), nil)
+	robot = turing.New(config.TuringApi(), config.TuringAppKey())
 
 	hangoutService = service.New()
 	hangoutService.Init()
@@ -95,5 +94,5 @@ func wxCallbackHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Para
 
 func main() {
 	createMenu()
-	log.Println(http.ListenAndServe(":"+config.Config.Port, hangoutService.Router))
+	log.Println(http.ListenAndServe(":"+config.Port(), hangoutService.Router))
 }

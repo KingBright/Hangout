@@ -1,6 +1,6 @@
 Port: 8787
 
-WX:
+Weixin:
   AppId: appid
   AppSecret: appsecret
   OriId: oriid

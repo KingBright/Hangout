@@ -7,6 +7,7 @@
 - [material](https://github.com/angular/material)
 
 ##Config
+Yaml config file supported.
 ```yaml
 Port: 8787
 WX:
