@@ -6,33 +6,33 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
 
     <title>不用密码</title>
-    <script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
-    <!-- bootstrap -->
-    <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
-    <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc4/angular-material.min.css">
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-aria.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-messages.min.js"></script>
+
+    <script src="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc4/angular-material.min.js"></script>
 </head>
-<body>
+<body ng-app="Page" ng-cloak>
+<md-toolbar class="md-theme" md-whiteframe="3">
+    <h2 class="md-toolbar-tools">
+        <span>不用密码</span>
+    </h2>
+</md-toolbar>
 
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand">不用密码</a>
-        </div>
-    </div>
-</nav>
-
-<div class="panel">
-    <div class="panel-body">
-        <p>为什么注册时不需要密码呢？下面是答案：</p>
-        <ul>
-            <li><p>我们直接使用微信提供的 Open Id 作为用户鉴权，登录微信即可使用本产品。</p></li>
-            <li><p>我们不会明文存储该 Open Id。</p></li>
-            <li><p>另外，为了保护您的账户安全，不要将我们发送给您的链接告知他人。</p></li>
-        </ul>
-    </div>
-</div>
+<md-content flex layout-padding>
+    <md-subheader class="md-primary">为什么注册时不需要密码呢？下面是答案：</md-subheader>
+    <md-list>
+        <md-list-item><p>我们直接使用微信提供的 Open Id 作为用户鉴权，登录微信即可使用本产品。</p></md-list-item>
+        <md-list-item><p>我们不会明文存储该 Open Id。</p></md-list-item>
+        <md-list-item><p>另外，为了保证您的账户安全，不要将我们发送给您的链接告知他人。</p></md-list-item>
+    </md-list>
+</md-content>
 
 </div>
 </body>
+<script>
+    angular.module('Page', ['ngMaterial'])
+</script>
 </html>

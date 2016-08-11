@@ -5,30 +5,31 @@
     <!-- Sets initial viewport load and disables zooming  -->
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <title>帮助</title>
-    <script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
-    <!-- bootstrap -->
-    <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
-    <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-<body>
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand">帮助</a>
-        </div>
-    </div>
-</nav>
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc4/angular-material.min.css">
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-aria.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-messages.min.js"></script>
 
-<div class="panel">
-    <div class="panel-body">
-        <p>登录已过期？</p>
-        <ul>
-            <li><p>在公众号中回复"Hangout"。</p></li>
-            <li><p>复制回复的链接。（也可以在微信浏览器中打开，但是由于微信浏览器的一些原因，体验会有点问题）</p></li>
-            <li><p>在浏览器中粘贴打开即可。</p></li>
-        </ul>
-    </div>
-</div>
+    <script src="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc4/angular-material.min.js"></script>
+</head>
+<body ng-app="Page" ng-cloak>
+<md-toolbar class="md-theme" md-whiteframe="3">
+    <h2 class="md-toolbar-tools">
+        <span>帮助</span>
+    </h2>
+</md-toolbar>
+
+<md-content flex layout-padding>
+    <md-subheader class="md-primary">登录已过期？</md-subheader>
+    <md-list>
+        <md-list-item><p>1. 在公众号中回复"Hangout"。</p></md-list-item>
+        <md-list-item><p>2. 复制回复的链接。（也可以在微信浏览器中打开，但是由于微信浏览器的一些原因，体验会有点问题）</p></md-list-item>
+        <md-list-item><p>3. 在浏览器中粘贴打开即可。</p></md-list-item>
+    </md-list>
+</md-content>
+<script>
+    angular.module('Page', ['ngMaterial'])
+</script>
 </body>
 </html>

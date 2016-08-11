@@ -6,13 +6,15 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
 
     <title>我的聚会</title>
-    <script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
-    <!-- bootstrap -->
-    <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
-    <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc4/angular-material.min.css">
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-aria.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-messages.min.js"></script>
+
+    <script src="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc4/angular-material.min.js"></script>
 </head>
-<body>
+<body ng-app="Page" ng-cloak>
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -21,10 +23,19 @@
         </div>
     </div>
 </nav>
+<md-toolbar class="md-theme" md-whiteframe="3">
+    <h2 class="md-toolbar-tools">
+        <span>我的聚会</span>
+    </h2>
+</md-toolbar>
 
-<div class="panel">
-    <div class="panel-body">
-    </div>
-</div>
+<md-content flex layout-padding>
+    <md-list>
+
+    </md-list>
+</md-content>
 </body>
+<script>
+    angular.module('Page', ['ngMaterial'])
+</script>
 </html>
