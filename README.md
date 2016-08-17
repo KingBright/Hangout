@@ -1,5 +1,7 @@
 #Hangout
 
+Still in construction.
+
 ##Dependencies
 - [wechat.v2](https://github.com/chanxuehong/wechat.v2)
 - [httprouter](https://github.com/julienschmidt/httprouter)
