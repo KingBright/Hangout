@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
@@ -19,7 +20,8 @@ import (
 var (
 	msgHandler core.Handler
 	msgServer  *core.Server
-	robot      *turing.Turing
+
+	robot *turing.Turing
 
 	tokenServer *core.DefaultAccessTokenServer
 
@@ -34,11 +36,12 @@ func init() {
 	mux.DefaultEventHandleFunc(defaultEventHandler)
 	mux.MsgHandleFunc(request.MsgTypeText, textMsgHandler)
 	mux.EventHandleFunc(menu.EventTypeClick, menuClickEventHandler)
-	msgHandler = mux
 
+	msgHandler = mux
 	msgServer = core.NewServer(config.WxOriId(), config.WxAppId(), config.WxToken(), config.WxEncodedAESKey(), msgHandler, nil)
 
 	tokenServer = core.NewDefaultAccessTokenServer(config.WxAppId(), config.WxAppSecret(), nil)
+
 	robot = turing.New(config.TuringApi(), config.TuringAppKey())
 
 	hangoutService = service.New()
@@ -74,15 +77,16 @@ func defaultEventHandler(ctx *core.Context) {
 }
 
 func createMenu() {
-	// wxClient := core.NewClient(tokenServer, nil)
-	// hangoutBtn := menu.Button{menu.ButtonTypeText, "Hangout", "hangout", "", "hangout", nil}
-	// menuToCreate := menu.Menu{[]menu.Button{hangoutBtn}, nil, 0}
-	// err := menu.Create(wxClient, &menuToCreate)
-	// if err != nil {
-	// 	log.Printf("创建菜单失败%s", err.Error())
-	// } else {
-	// 	log.Printf("创建菜单%s\n", "View Hangout")
-	// }
+	wxClient := core.NewClient(tokenServer, nil)
+	hangoutBtn := menu.Button{Type: menu.ButtonTypeText, Name: "Hangout", Key: "", URL: "", MediaId: "", AppId: "", PagePath: "", SubButtons: nil}
+	testBtn := menu.Button{Type: menu.ButtonTypeText, Name: "Test", Key: "", URL: "", MediaId: "", AppId: "", PagePath: "", SubButtons: nil}
+	menuToCreate := menu.Menu{Buttons: []menu.Button{hangoutBtn, testBtn}, MatchRule: nil, MenuId: 0}
+	err := menu.Create(wxClient, &menuToCreate)
+	if err != nil {
+		log.Printf("创建菜单失败%s", err.Error())
+	} else {
+		log.Printf("创建菜单%s\n", "View Hangout")
+	}
 }
 
 // wxCallbackHandler 是处理回调请求的 http handler.
@@ -93,6 +97,7 @@ func wxCallbackHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Para
 }
 
 func main() {
-	createMenu()
-	log.Println(http.ListenAndServe(":"+config.Port(), hangoutService.Router))
+	// createMenu()
+	log.Printf("listen to port %d", config.Port())
+	log.Println(http.ListenAndServe(fmt.Sprintf(":%d", config.Port()), hangoutService.Router))
 }

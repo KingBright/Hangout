@@ -9,7 +9,7 @@ import (
 
 	"hacklife.fun/wechat/service/constant"
 	"hacklife.fun/wechat/service/token"
-	"hacklife.fun/wechat/util"
+	"hacklife.fun/wechat/service/util"
 )
 
 // Create a token

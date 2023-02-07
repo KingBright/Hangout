@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"path/filepath"
 
-	"github.com/go-ozzo/ozzo-config"
+	config "github.com/go-ozzo/ozzo-config"
 )
 
 var c *config.Config
 
-func Port() string {
-	return c.GetString("Port", "8787")
+func Port() int {
+	return c.GetInt("Port", 8787)
 }
 
 func WxAppId() string {

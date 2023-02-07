@@ -14,7 +14,7 @@ import (
 	"hacklife.fun/wechat/service/model"
 	"hacklife.fun/wechat/service/mwchain"
 	"hacklife.fun/wechat/service/tpl"
-	"hacklife.fun/wechat/util"
+	"hacklife.fun/wechat/service/util"
 )
 
 type HangoutService struct {
@@ -83,7 +83,7 @@ func tokenHandler(w http.ResponseWriter, r *http.Request, params httprouter.Para
 		return nil
 	} else {
 		log.Println("token not valid")
-		errorPage(w, r, tpl.ErrorMsg{"出错啦", "您的登录状态有问题。"})
+		errorPage(w, r, tpl.ErrorMsg{Title: "出错啦", Message: "您的登录状态有问题。"})
 		return errors.New("")
 	}
 }
@@ -96,11 +96,11 @@ func authHandler(w http.ResponseWriter, r *http.Request, params httprouter.Param
 	} else {
 		if tokenOk {
 			log.Println("redirect to register")
-			jump(w, r, tpl.JumpInfo{"注册", constant.PATH_REGISTER})
+			jump(w, r, tpl.JumpInfo{TargetName: "注册", TargetUrl: constant.PATH_REGISTER})
 			return errors.New("")
 		} else {
 			log.Println("redirect to error page")
-			errorPage(w, r, tpl.ErrorMsg{"出错啦", "登录超时了！请参考帮助页面刷新登录状态。"})
+			errorPage(w, r, tpl.ErrorMsg{Title: "出错啦", Message: "登录超时了！请参考帮助页面刷新登录状态。"})
 			return errors.New("")
 		}
 	}
@@ -113,16 +113,16 @@ func doRegisterHandler(w http.ResponseWriter, r *http.Request, params httprouter
 	token := util.GetCookie(r, constant.TOKEN)
 	if err := model.CreateUserIfNotExist(name, email, token); err == nil {
 		log.Println("user created or exists")
-		jump(w, r, tpl.JumpInfo{"您的首页", constant.PATH_HOME})
+		jump(w, r, tpl.JumpInfo{TargetName: "您的首页", TargetUrl: constant.PATH_HOME})
 	} else {
 		log.Println("error occured")
-		errorPage(w, r, tpl.ErrorMsg{"出错啦", "认证失败啦，无法注册！"})
+		errorPage(w, r, tpl.ErrorMsg{Title: "出错啦", Message: "认证失败啦，无法注册！"})
 	}
 	return nil
 }
 
 func doPublishHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) error {
-	errorPage(w, r, tpl.ErrorMsg{"出错啦", "还没有开发完成！"})
+	errorPage(w, r, tpl.ErrorMsg{Title: "出错啦", Message: "还没有开发完成！"})
 	return nil
 }
 func homeHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) error {
@@ -160,7 +160,7 @@ func registerHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params
 	token := util.GetCookie(r, constant.TOKEN)
 	if model.CheckUserExist(token) {
 		log.Println("user created or exists")
-		jump(w, r, tpl.JumpInfo{"您的首页", constant.PATH_HOME})
+		jump(w, r, tpl.JumpInfo{TargetName: "您的首页", TargetUrl: constant.PATH_HOME})
 	} else {
 		tpl.Register(w, r)
 	}
