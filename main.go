@@ -4,15 +4,15 @@ import (
 	"log"
 	"net/http"
 
-	"./service"
-	"./service/config"
-	"./service/constant"
-	"./turing"
+	"hacklife.fun/wechat/service"
+	"hacklife.fun/wechat/service/config"
+	"hacklife.fun/wechat/service/constant"
+	"hacklife.fun/wechat/turing"
 
-	"github.com/chanxuehong/wechat.v2/mp/core"
-	"github.com/chanxuehong/wechat.v2/mp/menu"
-	"github.com/chanxuehong/wechat.v2/mp/message/callback/request"
-	"github.com/chanxuehong/wechat.v2/mp/message/callback/response"
+	"github.com/chanxuehong/wechat/mp/core"
+	"github.com/chanxuehong/wechat/mp/menu"
+	"github.com/chanxuehong/wechat/mp/message/callback/request"
+	"github.com/chanxuehong/wechat/mp/message/callback/response"
 	"github.com/julienschmidt/httprouter"
 )
 

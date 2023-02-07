@@ -3,9 +3,9 @@ package model
 import (
 	"log"
 
-	"github.com/go-xorm/core"
-	"github.com/go-xorm/xorm"
 	_ "github.com/mattn/go-sqlite3"
+	"xorm.io/xorm"
+	"xorm.io/xorm/core"
 )
 
 var engine *xorm.Engine

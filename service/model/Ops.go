@@ -7,9 +7,9 @@ import (
 	"net/http"
 	"time"
 
-	"../constant"
-	"../token"
-	"../util"
+	"hacklife.fun/wechat/service/constant"
+	"hacklife.fun/wechat/service/token"
+	"hacklife.fun/wechat/util"
 )
 
 // Create a token

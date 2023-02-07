@@ -3,7 +3,7 @@
 Still in construction.
 
 ##Dependencies
-- [wechat.v2](https://github.com/chanxuehong/wechat.v2)
+- [wechat](https://github.com/chanxuehong/wechat)
 - [httprouter](https://github.com/julienschmidt/httprouter)
 - [angular.js](https://github.com/angular/angular.js)
 - [material](https://github.com/angular/material)

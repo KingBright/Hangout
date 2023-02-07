@@ -8,11 +8,11 @@ import (
 	"net/http"
 	"strings"
 
-	"../util"
+	"hacklife.fun/wechat/service/util"
 
-	"github.com/chanxuehong/wechat.v2/mp/core"
-	"github.com/chanxuehong/wechat.v2/mp/message/callback/request"
-	"github.com/chanxuehong/wechat.v2/mp/message/callback/response"
+	"github.com/chanxuehong/wechat/mp/core"
+	"github.com/chanxuehong/wechat/mp/message/callback/request"
+	"github.com/chanxuehong/wechat/mp/message/callback/response"
 )
 
 const (
@@ -42,14 +42,14 @@ type Ask struct {
 	Key    string `json:"key"`
 }
 
-//40001	参数key错误
-//40002	请求内容info为空
-//40004	当天请求次数已使用完
-//40007	数据格式异常
-//100000	文本类
-//200000	链接类
-//302000	新闻类
-//308000	菜谱类
+// 40001	参数key错误
+// 40002	请求内容info为空
+// 40004	当天请求次数已使用完
+// 40007	数据格式异常
+// 100000	文本类
+// 200000	链接类
+// 302000	新闻类
+// 308000	菜谱类
 type CodeMessage struct {
 	Code int `json:"code"`
 }

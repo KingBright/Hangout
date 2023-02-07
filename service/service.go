@@ -6,15 +6,15 @@ import (
 	"net/http"
 	"net/url"
 
-	"./constant"
-	"./model"
-	"./mwchain"
-	"./tpl"
-	"./util"
-	"github.com/chanxuehong/wechat.v2/mp/core"
-	"github.com/chanxuehong/wechat.v2/mp/message/callback/request"
-	"github.com/chanxuehong/wechat.v2/mp/message/callback/response"
+	"github.com/chanxuehong/wechat/mp/core"
+	"github.com/chanxuehong/wechat/mp/message/callback/request"
+	"github.com/chanxuehong/wechat/mp/message/callback/response"
 	"github.com/julienschmidt/httprouter"
+	"hacklife.fun/wechat/service/constant"
+	"hacklife.fun/wechat/service/model"
+	"hacklife.fun/wechat/service/mwchain"
+	"hacklife.fun/wechat/service/tpl"
+	"hacklife.fun/wechat/util"
 )
 
 type HangoutService struct {

@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"../util"
+	"hacklife.fun/wechat/util"
 )
 
 type Token struct {
