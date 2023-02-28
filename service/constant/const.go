@@ -1,7 +1,7 @@
 package constant
 
 const (
-	BASE_URL = "http://wx.hacklife.fun/"
+	BASE_URL = "http://wx.hackerlife.fun/"
 
 	WEIXIN_CALLBACK = "/wx_callback"
 

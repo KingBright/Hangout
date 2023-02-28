@@ -48,9 +48,11 @@ func init() {
 	hangoutService.Init()
 
 	hangoutService.POST(constant.WEIXIN_CALLBACK, wxCallbackHandler)
+	hangoutService.GET(constant.WEIXIN_CALLBACK, wxCallbackHandler)
 }
 
 func textMsgHandler(ctx *core.Context) {
+	log.Printf("收到消息:\n%s\n", ctx.MsgPlaintext)
 	if !hangoutService.HandleMsg(ctx) {
 		robot.Reply(ctx)
 	}
