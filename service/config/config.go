@@ -30,12 +30,8 @@ func WxEncodedAESKey() string {
 	return c.GetString("Weixin.EncodedAESKey", "")
 }
 
-func TuringApi() string {
-	return c.GetString("Turing.Api", "")
-}
-
-func TuringAppKey() string {
-	return c.GetString("Turing.AppKey", "")
+func ChatApiKey() string {
+	return c.GetString("Chat.ApiKey", "")
 }
 
 func init() {

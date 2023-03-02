@@ -7,6 +7,5 @@ Weixin:
   Token: token
   EncodedAESKey: aeskey
 
-Turing:
-  Api: turingapi
-  AppKey: apikey
+Chat:
+  ApiKey: apikey

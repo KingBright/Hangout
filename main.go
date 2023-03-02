@@ -5,10 +5,10 @@ import (
 	"log"
 	"net/http"
 
+	chat "hacklife.fun/wechat/chat"
 	"hacklife.fun/wechat/service"
 	"hacklife.fun/wechat/service/config"
 	"hacklife.fun/wechat/service/constant"
-	"hacklife.fun/wechat/turing"
 
 	"github.com/chanxuehong/wechat/mp/core"
 	"github.com/chanxuehong/wechat/mp/menu"
@@ -21,7 +21,7 @@ var (
 	msgHandler core.Handler
 	msgServer  *core.Server
 
-	robot *turing.Turing
+	robot *chat.Chat
 
 	tokenServer *core.DefaultAccessTokenServer
 
@@ -42,7 +42,7 @@ func init() {
 
 	tokenServer = core.NewDefaultAccessTokenServer(config.WxAppId(), config.WxAppSecret(), nil)
 
-	robot = turing.New(config.TuringApi(), config.TuringAppKey())
+	robot = chat.New(config.ChatApiKey())
 
 	hangoutService = service.New()
 	hangoutService.Init()
