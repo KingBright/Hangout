@@ -43,6 +43,7 @@ func (chat Chat) Reply(ctx *core.Context) {
 		Messages: []openaigo.ChatMessage{
 			{Role: "user", Content: msg.Content},
 		},
+		User: from,
 	}
 	rsp, err := chat.chat(context.Background(), request)
 
