@@ -1,15 +1,18 @@
-#Hangout
+# Hangout
 
 Still in construction.
 
-##Dependencies
+## Dependencies
+
 - [wechat](https://github.com/chanxuehong/wechat)
 - [httprouter](https://github.com/julienschmidt/httprouter)
 - [angular.js](https://github.com/angular/angular.js)
 - [material](https://github.com/angular/material)
 
-##Config
+## Config
+
 Yaml config file supported.
+
 ```yaml
 Port: 8787
 WX:
@@ -19,7 +22,6 @@ WX:
   Token: token
   EncodedAESKey: aeskey
 
-Turing:
-  Api: turingapi
-  AppKey: apikey
+Chat:
+  ApiKey: apiKey
 ```
