@@ -4,13 +4,15 @@ import (
 	"context"
 	"log"
 	"strings"
+	"time"
 
 	"hacklife.fun/wechat/service/util"
 
 	"github.com/chanxuehong/wechat/mp/core"
 	"github.com/chanxuehong/wechat/mp/message/callback/request"
 	"github.com/chanxuehong/wechat/mp/message/callback/response"
-	"github.com/otiai10/openaigo"
+	cache "github.com/karlseguin/ccache"
+	openai "github.com/sashabaranov/go-openai"
 )
 
 const (
@@ -18,17 +20,24 @@ const (
 )
 
 type Chat struct {
-	client *openaigo.Client
+	cli   *openai.Client
+	cache *cache.Cache
+}
+
+type ChatCache struct {
+	Msg   *string
+	Reply *string
 }
 
 func New(apiKey string) *Chat {
 	var t Chat
-	t.client = openaigo.NewClient(apiKey)
+	t.cli = openai.NewClient(apiKey)
+	t.cache = cache.New(cache.Configure().MaxSize(100).ItemsToPrune(50))
 	return &t
 }
 
-func (chat Chat) chat(ctx context.Context, req openaigo.ChatCompletionRequestBody) (resp openaigo.ChatCompletionResponse, err error) {
-	rsp, err := chat.client.Chat(ctx, req)
+func (chat Chat) chat(ctx context.Context, req openai.ChatCompletionRequest) (resp openai.ChatCompletionResponse, err error) {
+	rsp, err := chat.cli.CreateChatCompletion(ctx, req)
 	return rsp, err
 }
 
@@ -38,9 +47,22 @@ func (chat Chat) Reply(ctx *core.Context) {
 	to := msg.ToUserName
 	log.Printf("%s问: %s\n", msg.FromUserName, msg.Content)
 
-	request := openaigo.ChatCompletionRequestBody{
-		Model: "gpt-3.5-turbo",
-		Messages: []openaigo.ChatMessage{
+	if strings.EqualFold(strings.ToLower(msg.Content), "retry") {
+		// reply from cache
+		result := chat.cache.Get(msg.FromUserName).Value()
+		if result != nil {
+			c := result.(ChatCache)
+			if c.Reply != nil {
+				log.Printf("reply: %s", *c.Reply)
+				ctx.RawResponse(response.NewText(from, to, util.Now(), *c.Reply)) // 明文回复
+				return
+			}
+		}
+	}
+
+	request := openai.ChatCompletionRequest{
+		Model: openai.GPT3Dot5Turbo,
+		Messages: []openai.ChatCompletionMessage{
 			{Role: "user", Content: msg.Content},
 		},
 		User: from,
@@ -63,6 +85,12 @@ func (chat Chat) Reply(ctx *core.Context) {
 		log.Printf("reply: %s", choices[0].Message.Content)
 		str := strings.Trim(choices[0].Message.Content, " ")
 		str = strings.ReplaceAll(str, "\n", "")
+
+		// put to cache
+		chat.cache.Set(from, ChatCache{
+			Msg:   &msg.Content,
+			Reply: &str,
+		}, time.Minute*2)
 		ctx.RawResponse(response.NewText(from, to, util.Now(), str)) // 明文回复
 		return
 	}
@@ -74,6 +102,12 @@ func (chat Chat) Reply(ctx *core.Context) {
 		reply += str + "\n"
 	}
 	log.Printf("reply: %s", reply)
+
+	// put to cache
+	chat.cache.Set(from, ChatCache{
+		Msg:   &msg.Content,
+		Reply: &reply,
+	}, time.Minute*2)
 	ctx.RawResponse(response.NewText(from, to, util.Now(), reply)) // 明文回复
 
 }
