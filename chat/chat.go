@@ -55,9 +55,9 @@ func (chat Chat) Reply(ctx *core.Context) {
 			if c.Reply != nil {
 				log.Printf("reply: %s", *c.Reply)
 				ctx.RawResponse(response.NewText(from, to, util.Now(), *c.Reply)) // 明文回复
-				return
 			}
 		}
+		return
 	}
 
 	request := openai.ChatCompletionRequest{
